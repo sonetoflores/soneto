@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Soneto — Flores frescas en tu edificio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --verde:    #2D4A3E;
+      --crema:    #F7F3ED;
+      --rosa:     #D4A5A5;
+      --tierra:   #8B6F5E;
+      --blanco:   #FDFCFB;
+      --texto:    #1C1C1C;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--blanco);
+      color: var(--texto);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 40px;
+      background: rgba(253, 252, 251, 0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: var(--verde);
+    }
+
+    .nav-cta {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--verde);
+      text-decoration: none;
+      border-bottom: 1px solid var(--verde);
+      padding-bottom: 2px;
+      transition: opacity 0.2s;
+    }
+    .nav-cta:hover { opacity: 0.6; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding-top: 80px;
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px 60px 80px 80px;
+    }
+
+    .eyebrow {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--tierra);
+      margin-bottom: 28px;
+    }
+
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.8rem, 4.5vw, 4.2rem);
+      font-weight: 400;
+      line-height: 1.08;
+      color: var(--verde);
+      margin-bottom: 28px;
+    }
+
+    h1 em {
+      font-style: italic;
+      color: var(--tierra);
+    }
+
+    .hero-desc {
+      font-size: 1rem;
+      color: #555;
+      max-width: 380px;
+      margin-bottom: 48px;
+      line-height: 1.7;
+    }
+
+    /* ── FORM ── */
+    .form-wrap {
+      background: var(--verde);
+      padding: 40px;
+      border-radius: 2px;
+      max-width: 400px;
+    }
+
+    .form-wrap p {
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--rosa);
+      margin-bottom: 24px;
+    }
+
+    .form-wrap input {
+      display: block;
+      width: 100%;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid rgba(255,255,255,0.25);
+      padding: 12px 0;
+      color: var(--blanco);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 300;
+      margin-bottom: 20px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form-wrap input::placeholder { color: rgba(255,255,255,0.4); }
+    .form-wrap input:focus { border-bottom-color: var(--rosa); }
+
+    .btn-submit {
+      width: 100%;
+      margin-top: 12px;
+      padding: 16px;
+      background: var(--rosa);
+      border: none;
+      border-radius: 1px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--verde);
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-submit:hover { background: #e0b8b8; transform: translateY(-1px); }
+    .btn-submit:active { transform: translateY(0); }
+
+    .form-note {
+      font-size: 0.72rem !important;
+      color: rgba(255,255,255,0.3) !important;
+      margin-top: 16px !important;
+      letter-spacing: 0 !important;
+      text-transform: none !important;
+    }
+
+    /* ── HERO RIGHT (visual) ── */
+    .hero-right {
+      background: var(--crema);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-right-inner {
+      text-align: center;
+      padding: 60px 40px;
+    }
+
+    .floral-svg {
+      width: 320px;
+      max-width: 80%;
+      opacity: 0.85;
+    }
+
+    .tagline-visual {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--tierra);
+      margin-top: 32px;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── PROOF STRIP ── */
+    .proof {
+      background: var(--verde);
+      padding: 28px 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 60px;
+    }
+
+    .proof-item {
+      text-align: center;
+    }
+
+    .proof-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 400;
+      color: var(--rosa);
+      display: block;
+    }
+
+    .proof-label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .proof-divider {
+      width: 1px;
+      height: 40px;
+      background: rgba(255,255,255,0.15);
+    }
+
+    /* ── HOW IT WORKS ── */
+    .how {
+      padding: 100px 80px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--tierra);
+      margin-bottom: 48px;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 48px;
+    }
+
+    .step-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      font-weight: 400;
+      color: var(--crema);
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+
+    .step h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: var(--verde);
+      margin-bottom: 12px;
+    }
+
+    .step p {
+      font-size: 0.9rem;
+      color: #777;
+      line-height: 1.7;
+    }
+
+    /* ── BOTTOM CTA ── */
+    .bottom-cta {
+      background: var(--crema);
+      padding: 100px 80px;
+      text-align: center;
+    }
+
+    .bottom-cta h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 400;
+      color: var(--verde);
+      margin-bottom: 12px;
+    }
+
+    .bottom-cta p {
+      font-size: 0.95rem;
+      color: #888;
+      margin-bottom: 36px;
+    }
+
+    .btn-outline {
+      display: inline-block;
+      padding: 14px 40px;
+      border: 1.5px solid var(--verde);
+      color: var(--verde);
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-outline:hover { background: var(--verde); color: var(--blanco); }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 32px 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid rgba(0,0,0,0.07);
+    }
+
+    footer .logo { font-size: 1.1rem; }
+
+    footer p {
+      font-size: 0.75rem;
+      color: #bbb;
+    }
+
+    /* ── SUCCESS STATE ── */
+    .success-msg {
+      display: none;
+      text-align: center;
+      padding: 32px 0;
+    }
+
+    .success-msg .check {
+      font-size: 2rem;
+      margin-bottom: 16px;
+    }
+
+    .success-msg h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      color: var(--blanco);
+      font-weight: 400;
+      margin-bottom: 8px;
+    }
+
+    .success-msg p {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.55);
+      letter-spacing: 0;
+      text-transform: none;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 18px 24px; }
+
+      .hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+
+      .hero-left { padding: 60px 24px 48px; }
+      .hero-right { padding: 48px 24px; min-height: 360px; }
+      .form-wrap { max-width: 100%; }
+
+      .proof {
+        padding: 28px 24px;
+        gap: 24px;
+        flex-wrap: wrap;
+      }
+
+      .proof-divider { display: none; }
+
+      .how { padding: 60px 24px; }
+      .steps { grid-template-columns: 1fr; gap: 36px; }
+
+      .bottom-cta { padding: 60px 24px; }
+      footer { padding: 24px; flex-direction: column; gap: 8px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <span class="logo">Soneto</span>
+    <a href="#form" class="nav-cta">Quiero suscribirme</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <p class="eyebrow">Suscripción mensual · Polanco, CDMX</p>
+      <h1>Flores frescas,<br><em>sin salir</em><br>de tu edificio</h1>
+      <p class="hero-desc">
+        Cada mes llevamos un arreglo floral de temporada directo a la puerta de tu departamento. Sin filas, sin traslados, sin marchitar.
+      </p>
+
+      <div class="form-wrap" id="form">
+        <p>Deja tus datos y te avisamos cuando lancemos</p>
+        <form id="lead-form">
+          <input type="text" name="nombre" placeholder="Tu nombre" required />
+          <input type="email" name="email" placeholder="Correo electrónico" required />
+          <input type="tel" name="telefono" placeholder="WhatsApp" />
+          <input type="text" name="edificio" placeholder="Nombre o colonia de tu edificio" />
+          <button type="submit" class="btn-submit">Quiero mis flores</button>
+          <p class="form-note">Sin spam. Solo te contactamos cuando estemos listos en tu zona.</p>
+        </form>
+        <div class="success-msg" id="success">
+          <div class="check">✦</div>
+          <h3>Listo, te tenemos en lista.</h3>
+          <p>Te avisamos en cuanto Soneto llegue a tu edificio.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="hero-right-inner">
+        <!-- Inline SVG floral illustration -->
+        <svg class="floral-svg" viewBox="0 0 400 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Stem -->
+          <path d="M200 390 Q195 320 200 260 Q205 200 200 150" stroke="#2D4A3E" stroke-width="2.5" stroke-linecap="round"/>
+          <!-- Left branch -->
+          <path d="M200 300 Q170 285 145 270" stroke="#2D4A3E" stroke-width="1.8" stroke-linecap="round"/>
+          <!-- Right branch -->
+          <path d="M200 270 Q228 255 252 240" stroke="#2D4A3E" stroke-width="1.8" stroke-linecap="round"/>
+          <!-- Left leaf -->
+          <path d="M145 270 Q125 250 130 230 Q155 245 145 270Z" fill="#2D4A3E" opacity="0.7"/>
+          <!-- Right leaf -->
+          <path d="M252 240 Q272 220 268 200 Q245 215 252 240Z" fill="#2D4A3E" opacity="0.7"/>
+          <!-- Center small leaf -->
+          <path d="M200 230 Q182 210 185 190 Q205 205 200 230Z" fill="#2D4A3E" opacity="0.5"/>
+
+          <!-- Main flower - large rose shape -->
+          <!-- Outer petals -->
+          <ellipse cx="200" cy="130" rx="22" ry="38" fill="#D4A5A5" opacity="0.5" transform="rotate(-20 200 130)"/>
+          <ellipse cx="200" cy="130" rx="22" ry="38" fill="#D4A5A5" opacity="0.5" transform="rotate(20 200 130)"/>
+          <ellipse cx="200" cy="130" rx="22" ry="38" fill="#D4A5A5" opacity="0.5" transform="rotate(70 200 130)"/>
+          <ellipse cx="200" cy="130" rx="22" ry="38" fill="#D4A5A5" opacity="0.5" transform="rotate(-70 200 130)"/>
+          <ellipse cx="200" cy="130" rx="22" ry="38" fill="#D4A5A5" opacity="0.5" transform="rotate(120 200 130)"/>
+          <ellipse cx="200" cy="130" rx="22" ry="38" fill="#D4A5A5" opacity="0.5" transform="rotate(-120 200 130)"/>
+          <!-- Mid petals -->
+          <ellipse cx="200" cy="130" rx="16" ry="28" fill="#D4A5A5" opacity="0.7" transform="rotate(0 200 130)"/>
+          <ellipse cx="200" cy="130" rx="16" ry="28" fill="#D4A5A5" opacity="0.7" transform="rotate(45 200 130)"/>
+          <ellipse cx="200" cy="130" rx="16" ry="28" fill="#D4A5A5" opacity="0.7" transform="rotate(90 200 130)"/>
+          <ellipse cx="200" cy="130" rx="16" ry="28" fill="#D4A5A5" opacity="0.7" transform="rotate(135 200 130)"/>
+          <!-- Inner -->
+          <ellipse cx="200" cy="130" rx="10" ry="18" fill="#C49494" opacity="0.9" transform="rotate(22 200 130)"/>
+          <ellipse cx="200" cy="130" rx="10" ry="18" fill="#C49494" opacity="0.9" transform="rotate(-22 200 130)"/>
+          <ellipse cx="200" cy="130" rx="10" ry="18" fill="#C49494" opacity="0.9" transform="rotate(90 200 130)"/>
+          <!-- Center -->
+          <circle cx="200" cy="130" r="10" fill="#8B6F5E"/>
+          <circle cx="200" cy="130" r="5" fill="#6B4F3E"/>
+
+          <!-- Small accent flower top left -->
+          <path d="M120 80 Q115 65 120 55 Q130 60 130 72Z" fill="#D4A5A5" opacity="0.6"/>
+          <path d="M120 80 Q108 72 105 62 Q118 58 120 80Z" fill="#D4A5A5" opacity="0.6"/>
+          <path d="M120 80 Q110 88 105 98 Q115 100 120 80Z" fill="#D4A5A5" opacity="0.5"/>
+          <path d="M120 80 Q132 88 138 96 Q128 102 120 80Z" fill="#D4A5A5" opacity="0.5"/>
+          <circle cx="120" cy="80" r="6" fill="#8B6F5E"/>
+          <path d="M120 80 Q112 95 115 110" stroke="#2D4A3E" stroke-width="1.5" stroke-linecap="round"/>
+
+          <!-- Small accent flower right -->
+          <path d="M290 100 Q285 87 290 78 Q299 83 298 94Z" fill="#D4A5A5" opacity="0.55"/>
+          <path d="M290 100 Q280 93 277 83 Q288 80 290 100Z" fill="#D4A5A5" opacity="0.55"/>
+          <path d="M290 100 Q281 108 278 117 Q287 119 290 100Z" fill="#D4A5A5" opacity="0.45"/>
+          <path d="M290 100 Q300 108 305 116 Q297 121 290 100Z" fill="#D4A5A5" opacity="0.45"/>
+          <circle cx="290" cy="100" r="5.5" fill="#8B6F5E"/>
+          <path d="M290 100 Q283 113 285 128" stroke="#2D4A3E" stroke-width="1.5" stroke-linecap="round"/>
+
+          <!-- Tiny buds -->
+          <ellipse cx="160" cy="60" rx="5" ry="9" fill="#D4A5A5" opacity="0.5" transform="rotate(-15 160 60)"/>
+          <path d="M160 69 Q158 80 160 90" stroke="#2D4A3E" stroke-width="1.2" stroke-linecap="round"/>
+
+          <ellipse cx="248" cy="55" rx="4" ry="8" fill="#D4A5A5" opacity="0.45" transform="rotate(10 248 55)"/>
+          <path d="M248 63 Q250 74 248 84" stroke="#2D4A3E" stroke-width="1.2" stroke-linecap="round"/>
+
+          <!-- Scattered dots / pollen -->
+          <circle cx="175" cy="95" r="2" fill="#8B6F5E" opacity="0.3"/>
+          <circle cx="230" cy="88" r="1.5" fill="#8B6F5E" opacity="0.25"/>
+          <circle cx="155" cy="115" r="1.5" fill="#8B6F5E" opacity="0.2"/>
+          <circle cx="258" cy="130" r="2" fill="#8B6F5E" opacity="0.2"/>
+        </svg>
+        <p class="tagline-visual">De la flor al departamento</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROOF STRIP -->
+  <div class="proof">
+    <div class="proof-item">
+      <span class="proof-num">549</span>
+      <span class="proof-label">MXN al mes</span>
+    </div>
+    <div class="proof-divider"></div>
+    <div class="proof-item">
+      <span class="proof-num">1×</span>
+      <span class="proof-label">Entrega mensual</span>
+    </div>
+    <div class="proof-divider"></div>
+    <div class="proof-item">
+      <span class="proof-num">0</span>
+      <span class="proof-label">Filas ni traslados</span>
+    </div>
+    <div class="proof-divider"></div>
+    <div class="proof-item">
+      <span class="proof-num">Polanco</span>
+      <span class="proof-label">Primera zona</span>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <section class="how">
+    <p class="section-label">Cómo funciona</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">I</div>
+        <h3>Te suscribes una vez</h3>
+        <p>Sin contratos largos. Pagas mes a mes y cancelas cuando quieras desde WhatsApp.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">II</div>
+        <h3>Elegimos las flores</h3>
+        <p>Cada mes seleccionamos variedades de temporada del Mercado de Jamaica para garantizar frescura.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">III</div>
+        <h3>Las dejamos en tu puerta</h3>
+        <p>Coordinamos directamente con la recepción de tu edificio. Sin que tengas que estar presente.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOTTOM CTA -->
+  <section class="bottom-cta">
+    <h2>¿Vives en Polanco?</h2>
+    <p>Registra tu interés y te avisamos cuando lancemos en tu edificio.</p>
+    <a href="#form" class="btn-outline">Apúntame a la lista</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="logo">Soneto</span>
+    <p>© 2025 Soneto · Ciudad de México</p>
+  </footer>
+
+  <script>
+    const form = document.getElementById('lead-form');
+    const success = document.getElementById('success');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const data = {
+        nombre:   form.nombre.value,
+        email:    form.email.value,
+        telefono: form.telefono.value,
+        edificio: form.edificio.value,
+        fecha:    new Date().toISOString()
+      };
+
+      // Store locally (for MVP — swap for Google Sheets / backend later)
+      const leads = JSON.parse(localStorage.getItem('soneto_leads') || '[]');
+      leads.push(data);
+      localStorage.setItem('soneto_leads', JSON.stringify(leads));
+
+      // Show success
+      form.style.display = 'none';
+      success.style.display = 'block';
+
+      console.log('Lead capturado:', data);
+    });
+  </script>
+
+</body>
+</html>
